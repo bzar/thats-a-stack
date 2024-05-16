@@ -1,0 +1,15 @@
+{% extends "page.html" %}
+
+{% block main_content %}
+  <div class="flex gap-10 items-center">
+    <button class="bg-sky-500 p-2 rounded shadow-md"
+            hx-post="/ui/counter/increment"
+            hx-target="#counter">
+      Increment
+    </button>
+
+    <div id="counter"
+         hx-get="/ui/counter"
+         hx-trigger="load">...</div>
+  </div>
+{% endblock %}
