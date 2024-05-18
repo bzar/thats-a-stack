@@ -1,6 +1,7 @@
 use std::env;
 
 use axum::Router;
+use sqlx::AnyPool;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 mod app_state;
@@ -17,7 +18,11 @@ async fn main() {
         .with(tracing_subscriber::fmt::layer())
         .init();
 
-    let state = app_state::AppState::new();
+    sqlx::any::install_default_drivers();
+    let database_url = env::var("DATABASE_URL").unwrap();
+    let pool = AnyPool::connect(&database_url).await.unwrap();
+    sqlx::migrate!().run(&pool).await.unwrap();
+    let state = AppState::new(pool);
 
     let app = AppRouter::new()
         .nest("/", ui::router())

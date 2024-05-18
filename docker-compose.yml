@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pass
+    volumes:
+      - db:/var/lib/postgresql/data
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    links:
+      - postgres
+    environment:
+      DATABASE_URL: "postgresql://postgres:pass@postgres/postgres"
+volumes:
+  db:
+    driver: local
+

@@ -7,7 +7,9 @@ RUN cd tailwind && npm install --include dev && npm run prod
 
 FROM rust:1.78 as build
 WORKDIR /srv/app
+RUN apt-get update && apt-get install -y musl-tools
 COPY Cargo.toml Cargo.lock .
+COPY migrations migrations
 COPY assets assets
 COPY src src
 COPY --from=tailwind_build /srv/app/assets/main.css assets/main.css
