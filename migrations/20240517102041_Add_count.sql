@@ -1,4 +1,4 @@
 CREATE TABLE IF NOT EXISTS count (
     id serial primary key,
-    value INTEGER
+    value INTEGER NOT NULL
 )
