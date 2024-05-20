@@ -4,12 +4,12 @@ use axum::{
     routing::{get, post},
 };
 
-use crate::{AppRouter, AppState};
+use crate::{domain, AppRouter, AppState};
 
 #[derive(Template)]
 #[template(source = "<span>{{ count }}</span>", ext = "txt")]
 struct CounterTemplate {
-    count: i64,
+    count: domain::Counter,
 }
 
 pub fn router() -> AppRouter {

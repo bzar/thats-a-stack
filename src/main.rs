@@ -1,11 +1,12 @@
 use std::env;
 
 use axum::Router;
-use sqlx::AnyPool;
+use sqlx::PgPool;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 mod app_state;
 mod assets;
+mod domain;
 mod ui;
 
 pub use app_state::AppState;
@@ -20,7 +21,7 @@ async fn main() {
 
     sqlx::any::install_default_drivers();
     let database_url = env::var("DATABASE_URL").unwrap();
-    let pool = AnyPool::connect(&database_url).await.unwrap();
+    let pool = PgPool::connect(&database_url).await.unwrap();
     sqlx::migrate!().run(&pool).await.unwrap();
     let state = AppState::new(pool);
 
