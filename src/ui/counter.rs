@@ -20,12 +20,12 @@ pub fn router() -> AppRouter {
 
 async fn current(State(state): State<AppState>) -> impl IntoResponse {
     CounterTemplate {
-        count: state.counter().await,
+        count: state.counter(0).await,
     }
 }
 
 async fn increment(State(mut state): State<AppState>) -> impl IntoResponse {
     CounterTemplate {
-        count: state.increment_counter().await,
+        count: state.increment_counter(0).await,
     }
 }

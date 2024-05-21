@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "SELECT value FROM count LIMIT 1",
+  "query": "SELECT value FROM count WHERE id = $1",
   "describe": {
     "columns": [
       {
@@ -10,11 +10,13 @@
       }
     ],
     "parameters": {
-      "Left": []
+      "Left": [
+        "Int4"
+      ]
     },
     "nullable": [
-      true
+      false
     ]
   },
-  "hash": "afd5008beb5d39d29521dc8d16c58463cde45882fd7d32941804221e96591247"
+  "hash": "75363bf71b81d4d333616c84fe79651d95035e51dac11fe4e7afe1e3cfa9b0e2"
 }
