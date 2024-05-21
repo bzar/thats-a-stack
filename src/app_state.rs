@@ -20,9 +20,9 @@ impl AppState {
     pub async fn increment_counter(&mut self, id: domain::CounterId) -> domain::Counter {
         sqlx::query!(
             "INSERT INTO count(id, value) VALUES ($1, 1)
-                      ON CONFLICT (id)
-                      DO UPDATE SET value = count.value + 1
-                      RETURNING value",
+             ON CONFLICT (id)
+             DO UPDATE SET value = count.value + 1
+             RETURNING value",
             id
         )
         .fetch_one(&self.pool)

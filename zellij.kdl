@@ -1,0 +1,4 @@
+layout {
+	pane command="cargo" { args "watch" "-x" "run"; }
+	pane command="npm" { args "--prefix" "tailwind" "run" "dev"; }
+}
