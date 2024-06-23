@@ -1,0 +1,22 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "INSERT INTO count(id, value) VALUES ($1, 1)\n             ON CONFLICT (id)\n             DO UPDATE SET value = count.value + 1\n             RETURNING value",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "value",
+        "type_info": "Int4"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int4"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "41c000bef37864adafa7ddc2b78c2b2bdc0600ca5fab23eb728e772c093e0df4"
+}
